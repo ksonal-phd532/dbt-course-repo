@@ -2,12 +2,12 @@ airbnb:
   outputs:
     dev:
       type: snowflake
-      account: PHDATAPARTNER-AWS
-      user: KSONAL@PHDATA.IO
-      authenticator: externalbrowser
-      role: ALL_DE
-      database: USER_KSONAL
-      schema: DBT_AIRBNB
-      threads: 4
-      warehouse: COMPUTE_WH
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      authenticator: "{{ env_var('SNOWFLAKE_AUTHENTICATOR', 'externalbrowser') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      threads: "{{ env_var('DBT_THREADS', '4') | as_number }}"
   target: dev
